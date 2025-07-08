@@ -12,22 +12,40 @@
 //   }
 //   return profit;
 // }
+// var maxProfit = function (prices) {
+//   let sellIdx = prices.length - 1;
+//   let profit = 0;
+
+//   for (let buyIdx = prices.length - 1; buyIdx >= 0; buyIdx--) {
+//     let buyVal = prices[buyIdx];
+//     let sellVal = prices[sellIdx];
+
+//     if (buyVal - sellVal >= 0) {
+//       sellIdx = buyIdx;
+//     } else {
+//       let price = sellVal - buyVal;
+//       profit = Math.max(profit, price);
+//     }
+//   }
+//   return profit;
+// };
+
+// const prices = [7, 1, 5, 3, 6, 4];
+
 var maxProfit = function (prices) {
-  let sellIdx = prices.length - 1;
-  let profit = 0;
+  let left = 0;
+  let right = 1;
+  let maxProfit = 0;
 
-  for (let buyIdx = prices.length - 1; buyIdx >= 0; buyIdx--) {
-    let buyVal = prices[buyIdx];
-    let sellVal = prices[sellIdx];
-
-    if (buyVal - sellVal >= 0) {
-      sellIdx = buyIdx;
+  while (right < prices.length) {
+    if (prices[left] < prices[right]) {
+      let profit = prices[right] - prices[left];
+      maxProfit = Math.max(maxProfit, profit);
     } else {
-      let price = sellVal - buyVal;
-      profit = Math.max(profit, price);
+      left = right;
     }
   }
-  return profit;
+  right++;
 };
 
 const prices = [7, 1, 5, 3, 6, 4];
